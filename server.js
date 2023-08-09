@@ -7,11 +7,13 @@ wss.on("connection", function connection(ws) {
   console.log("Client connected");
 
   ws.on("message", function incoming(message) {
-    ws.send("Got your message");
-    console.log("received: %s", message);
+    const messageData = JSON.parse(message);
+    ws.send(`Server: ` + messageData);
+    console.log("direct message recived from client: " + messageData);
   });
+
   ws.on("close", function close() {
     console.log("Client disconnected");
   });
-  ws.send("Hello, client!");
+  ws.send("You are connected to the server");
 });
