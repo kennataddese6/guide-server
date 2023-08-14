@@ -13,6 +13,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use("/api/users", require("./routes/userRoutes"));
+
 console.log("server has started listening on port 8080");
 
 wss.on("connection", function connection(ws) {
