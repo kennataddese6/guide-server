@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema(
       type: Number,
     },
     PhoneNumber: {
-      type: Number,
+      type: String,
     },
     FloorNumber: {
       type: Number,
