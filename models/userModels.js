@@ -13,7 +13,6 @@ const userSchema = mongoose.Schema(
     Email: {
       type: String,
       required: [true, "Please add an email"],
-      unique: true,
     },
     Roles: {
       type: Number,

@@ -20,6 +20,8 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log("somethingwent wrong");
   }
 });
+
+
 module.exports = {
   registerUser,
 };
