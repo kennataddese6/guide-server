@@ -27,7 +27,7 @@ const registerCustomer = asyncHandler(async (req, res) => {
   });
   if (customer) {
     const Customers = await Customer.find();
-    res.status(200).json(Customers);
+    res.status(200).json(Customers.reverse());
   } else {
     res.status(409);
   }
