@@ -26,7 +26,8 @@ const registerCustomer = asyncHandler(async (req, res) => {
     ElevatorNumber: elevatorNumber,
   });
   if (customer) {
-    res.status(200).json(customer);
+    const Customers = await Customer.find();
+    res.status(200).json(Customers);
   } else {
     res.status(409);
   }
