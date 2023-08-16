@@ -10,9 +10,6 @@ const CustomerSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a Last Name"],
     },
-    PhoneNumber: {
-      type: String,
-    },
     Woreda: {
       type: String,
       required: [true, "Please add an email"],
@@ -22,19 +19,21 @@ const CustomerSchema = mongoose.Schema(
     },
     OfficeNumber: {
       type: String,
-      required: [true, "Please add a password"],
+      required: [true, "Please add a OfficeNumber"],
     },
     Department: {
       type: String,
-      required: [true, "Please add a password"],
+    },
+    PhoneNumber: {
+      type: Number,
     },
     FloorNumber: {
       type: Number,
     },
     ElevatorNumber: {
-        type: String,
-        required: [true, "Please add a password"],
-      },
+      type: String,
+      required: [true, "Please add a password"],
+    },
   },
   {
     timestamps: true,
