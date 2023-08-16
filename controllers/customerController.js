@@ -32,6 +32,11 @@ const registerCustomer = asyncHandler(async (req, res) => {
     res.status(409);
   }
 });
+const getCustomers = asyncHandler(async (req, res) => {
+  const Customers = await Customer.find();
+  res.status(200).json(Customers.reverse());
+});
 module.exports = {
   registerCustomer,
+  getCustomers,
 };
