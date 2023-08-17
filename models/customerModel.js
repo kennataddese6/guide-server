@@ -4,7 +4,7 @@ const CustomerSchema = mongoose.Schema(
   {
     FirstName: {
       type: String,
-      required: [true, "Please add a  First name"],
+      required: [true, "Please add a First name"],
     },
     LastName: {
       type: String,
@@ -12,27 +12,35 @@ const CustomerSchema = mongoose.Schema(
     },
     Woreda: {
       type: String,
-      required: [true, "Please add an email"],
+      required: [true, "Please add Woreda"],
     },
     SubCity: {
       type: Number,
+      required: [true, "Please add subCity"],
     },
     OfficeNumber: {
       type: String,
-      required: [true, "Please add a OfficeNumber"],
+      required: [true, "Please add an Office Number"],
     },
     Department: {
       type: String,
+      required: [true, "Please add a Department"],
     },
     PhoneNumber: {
       type: Number,
+      required: [true, "Please add a Phone Number"],
     },
     FloorNumber: {
       type: Number,
+      required: [true, "Please add a Floor Number"],
     },
     ElevatorNumber: {
       type: String,
-      required: [true, "Please add a password"],
+      required: [true, "Please add an Elavator Number"],
+    },
+    Status: {
+      type: String,
+      required: [true, "Please add a Status"],
     },
   },
   {
