@@ -33,7 +33,7 @@ wss.on("connection", function connection(ws, req) {
     clients.forEach(function (clientWs, clientEmail) {
       console.log("Here are the connected users", clientEmail);
       if (clientEmail === address) {
-        clientWs.send("Hello, Client A!: " + content);
+        clientWs.send(content);
       }
     });
   });
