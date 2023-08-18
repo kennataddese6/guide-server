@@ -24,7 +24,11 @@ const registerCustomer = asyncHandler(async (req, res) => {
     FloorNumber: floorNumber,
     Department: department,
     ElevatorNumber: elevatorNumber,
-    Status: "Waiting",
+    Status: "none",
+    Waiting: true,
+    Accepted: false,
+    Sent: false,
+    Arrived: false,
   });
   if (customer) {
     const Customers = await Customer.find();
