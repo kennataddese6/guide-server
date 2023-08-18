@@ -42,6 +42,22 @@ const CustomerSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a Status"],
     },
+    Waiting: {
+      type: Boolean,
+      required: [true, "Please add a Waiting Status"],
+    },
+    Accepted: {
+      type: Boolean,
+      required: [true, "Please add an Accepted Status"],
+    },
+    Sent: {
+      type: Boolean,
+      required: [true, "Please add a Sent Status"],
+    },
+    Arrived: {
+      type: Boolean,
+      required: [true, "Please add an Arrived Status"],
+    },
   },
   {
     timestamps: true,
