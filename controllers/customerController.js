@@ -41,7 +41,13 @@ const getCustomers = asyncHandler(async (req, res) => {
   const Customers = await Customer.find();
   res.status(200).json(Customers.reverse());
 });
+const getFloorCustomers = asyncHandler(async (req, res) => {
+  const Floor = req.body.floorNumber;
+  const Customers = await Customer.find({ floorNumber: Floor });
+  res.status(200).json(Customers.reverse());
+});
 module.exports = {
   registerCustomer,
   getCustomers,
+  getFloorCustomers,
 };
