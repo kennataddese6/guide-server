@@ -28,6 +28,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
+    LatestMessage: {
+      type: String,
+    },
   },
   {
     timestamps: true,
