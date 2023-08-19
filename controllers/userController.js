@@ -30,7 +30,12 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log("somethingwent wrong");
   }
 });
-
+const getFloorReceptionists = asyncHandler(async (req, res) => {
+  const roles = req.query.roles;
+  const FloorReceptionist = await User.find({ Roles: roles });
+  res.status(200).json(FloorReceptionist);
+});
 module.exports = {
   registerUser,
+  getFloorReceptionists,
 };
