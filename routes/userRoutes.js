@@ -9,6 +9,6 @@ const {
 
 router.post("/", registerUser);
 router.get("/floorReceptionists", getFloorReceptionists);
-router.get("/latestMessage", updateLatestMessage);
+router.put("/latestMessage", updateLatestMessage);
 
 module.exports = router;
