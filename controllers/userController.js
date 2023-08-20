@@ -36,7 +36,12 @@ const getFloorReceptionists = asyncHandler(async (req, res) => {
   const FloorReceptionist = await User.find({ Roles: roles });
   res.status(200).json(FloorReceptionist);
 });
+const updateLatestMessage = asyncHandler(async (req, res) => {
+  const LatestMessage = req.query.LatestMessage;
+  console.log('here is the latest message',req.query)
+});
 module.exports = {
   registerUser,
   getFloorReceptionists,
+  updateLatestMessage,
 };
