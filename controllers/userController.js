@@ -22,6 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
     PhoneNumber: phoneNumber,
     FloorNumber: floorNumber,
     Password: "Welcome2cbe",
+    LatestMessage:'',
   });
   if (user) {
     res.status(200).json(user);
