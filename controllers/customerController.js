@@ -46,6 +46,9 @@ const getFloorCustomers = asyncHandler(async (req, res) => {
   const Customers = await Customer.find({ FloorNumber: Floor });
   res.status(200).json(Customers.reverse());
 });
+const getSentCustomers = asyncHandler(async (req, res) => {
+  console.log("this is the incoming request ", req.query.Sent);
+});
 const updateCustomer = asyncHandler(async (req, res) => {
   console.log("here is the req. body", req.body);
   const Client = await Customer.findOne({ _id: req.body.ID });
@@ -62,4 +65,5 @@ module.exports = {
   getCustomers,
   getFloorCustomers,
   updateCustomer,
+  getSentCustomers,
 };
