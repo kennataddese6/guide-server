@@ -47,7 +47,8 @@ const getFloorCustomers = asyncHandler(async (req, res) => {
   res.status(200).json(Customers.reverse());
 });
 const getSentCustomers = asyncHandler(async (req, res) => {
-  console.log("this is the incoming request ", req.query.Sent);
+  const sentCustomers = await Customer.find({ Sent: req.query.Sent });
+  res.status(200).json(sentCustomers.reverse());
 });
 const updateCustomer = asyncHandler(async (req, res) => {
   console.log("here is the req. body", req.body);
