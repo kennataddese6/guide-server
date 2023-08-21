@@ -7,6 +7,7 @@ const {
   getFloorCustomers,
   updateCustomer,
   getSentCustomers,
+  getWaitingCustomers,
 } = require("../controllers/customerController");
 
 router.post("/", registerCustomer);
@@ -15,5 +16,6 @@ router.put("/", updateCustomer);
 
 router.get("/floorCustomers", getFloorCustomers);
 router.get("/sentCustomers", getSentCustomers);
+router.get("/waitingCustomers", getWaitingCustomers);
 
 module.exports = router;
