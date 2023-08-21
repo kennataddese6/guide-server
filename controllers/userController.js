@@ -37,8 +37,15 @@ const getFloorReceptionists = asyncHandler(async (req, res) => {
   res.status(200).json(FloorReceptionist);
 });
 const updateLatestMessage = asyncHandler(async (req, res) => {
-  const LatestMessage = req.query.LatestMessage;
-  console.log('here is the latest message',req.query)
+  const LatestMessage = req.body;
+  const Receptionist =await User.findOne({FloorNumber:LatestMessage.to})
+    if(Receptionist){
+  Receptionist.LatestMessage = await LatestMessage.content;
+  await Receptionist.save()
+  res.status(200).json('updated')
+}else{
+  res.status(404).json('Receptionist not found');
+}
 });
 module.exports = {
   registerUser,
