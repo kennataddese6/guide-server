@@ -48,6 +48,14 @@ const getFloorCustomers = asyncHandler(async (req, res) => {
 });
 const updateCustomer = asyncHandler(async (req, res) => {
   console.log("here is the req. body", req.body);
+  const Client = await Customer.findOne({ _id: req.body.ID });
+  if (Client) {
+    Client.Sent = await req.body.Sent;
+    await Client.save();
+    res.status(200).json("updated Cusotmer");
+  } else {
+    res.status(404).json("Customer not found");
+  }
 });
 module.exports = {
   registerCustomer,
