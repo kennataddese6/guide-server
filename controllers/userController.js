@@ -22,6 +22,7 @@ const registerUser = asyncHandler(async (req, res) => {
     PhoneNumber: phoneNumber,
     FloorNumber: floorNumber,
     Password: "Welcome2cbe",
+    LatestMessage:'',
   });
   if (user) {
     res.status(200).json(user);
@@ -30,7 +31,24 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log("somethingwent wrong");
   }
 });
-
+const getFloorReceptionists = asyncHandler(async (req, res) => {
+  const roles = req.query.roles;
+  const FloorReceptionist = await User.find({ Roles: roles });
+  res.status(200).json(FloorReceptionist);
+});
+const updateLatestMessage = asyncHandler(async (req, res) => {
+  const LatestMessage = req.body;
+  const Receptionist =await User.findOne({FloorNumber:LatestMessage.to})
+    if(Receptionist){
+  Receptionist.LatestMessage = await LatestMessage.content;
+  await Receptionist.save()
+  res.status(200).json('updated')
+}else{
+  res.status(404).json('Receptionist not found');
+}
+});
 module.exports = {
   registerUser,
+  getFloorReceptionists,
+  updateLatestMessage,
 };
