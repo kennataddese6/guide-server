@@ -33,7 +33,16 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const login = asyncHandler(async (req, res) => {
-  console.log("here is the request body", req.body);
+  const user = await User.findOne({ Email: req.body.email });
+  if (user) {
+    if (user.Password === req.body.password) {
+      res.status(200).json("Sucessful");
+    } else {
+      res.status(409).json("Incorrect Email or Password");
+    }
+  } else {
+    res.status(404).json("Receptionist not found");
+  }
 });
 const getFloorReceptionists = asyncHandler(async (req, res) => {
   const roles = req.query.roles;
