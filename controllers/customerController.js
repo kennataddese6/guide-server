@@ -58,7 +58,7 @@ const updateCustomer = asyncHandler(async (req, res) => {
   console.log("here is the req. body", req.body);
   const Client = await Customer.findOne({ _id: req.body.ID });
   if (Client) {
-    if (req.body.sent) {
+    if (req.body.Sent) {
       Client.Sent = await req.body.Sent;
       await Client.save();
     }
