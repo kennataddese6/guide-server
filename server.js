@@ -31,7 +31,7 @@ wss.on("connection", function connection(ws, req) {
     clients.set(email, ws);
     // Send personalized messages to a specific client
     clients.forEach(function (clientWs, clientEmail) {
-      console.log("Here are the connected users", clientEmail);
+      console.log("User connected is at floor: ", clientEmail);
       if (clientEmail === address) {
         clientWs.send(content);
       }
