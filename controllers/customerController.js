@@ -2,7 +2,6 @@ const Customer = require("../models/customerModel");
 const asyncHandler = require("express-async-handler");
 
 const registerCustomer = asyncHandler(async (req, res) => {
-  console.log("here is the request body", req.body);
   const {
     firstName,
     lastName,
