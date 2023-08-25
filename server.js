@@ -27,17 +27,19 @@ wss.on("connection", function connection(ws, req) {
     const address = messageData.address;
     clients.set(email, ws);
     // Send personalized messages to a specific client
-    clients.forEach(function (clientWs, clientEmail) {
-      console.log("User connected is at floor: ", clientEmail);
-      if (clientEmail === Number(address)) {
-        console.log("message is going to be send to ", address);
-        clientWs.send(content);
-      } else {
-        console.log("no user found", address, clientEmail);
-        console.log(typeof address);
-        console.log(typeof clientEmail);
-      }
-    });
+    if (content || address) {
+      clients.forEach(function (clientWs, clientEmail) {
+        console.log("User connected is at floor: ", clientEmail);
+        if (clientEmail === Number(address)) {
+          console.log("message is going to be send to ", address);
+          clientWs.send(content);
+        } else {
+          console.log("no user found", address, clientEmail);
+        }
+      });
+    } else {
+      console.log("Client Just Connected", email);
+    }
   });
 
   ws.on("close", function close() {
