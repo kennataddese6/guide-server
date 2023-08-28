@@ -30,20 +30,26 @@ const registerCustomer = asyncHandler(async (req, res) => {
     Arrived: false,
   });
   if (customer) {
-    const Customers = await Customer.find();
-    res.status(200).json(Customers.reverse());
+    const Customers = await Customer.find().sort({
+      updatedAt: -1,
+    });
+    res.status(200).json(Customers);
   } else {
     res.status(409);
   }
 });
 const getCustomers = asyncHandler(async (req, res) => {
-  const Customers = await Customer.find();
-  res.status(200).json(Customers.reverse());
+  const Customers = await Customer.find().sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(Customers);
 });
 const getFloorCustomers = asyncHandler(async (req, res) => {
   const Floor = req.query.floorNumber;
-  const Customers = await Customer.find({ FloorNumber: Floor });
-  res.status(200).json(Customers.reverse());
+  const Customers = await Customer.find({ FloorNumber: Floor }).sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(Customers);
 });
 const getSentCustomers = asyncHandler(async (req, res) => {
   const sentCustomers = await Customer.find({ Sent: req.query.Sent }).sort({
