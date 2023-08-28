@@ -46,7 +46,9 @@ const login = asyncHandler(async (req, res) => {
 });
 const getFloorReceptionists = asyncHandler(async (req, res) => {
   const roles = req.query.roles;
-  const FloorReceptionist = await User.find({ Roles: roles });
+  const FloorReceptionist = await User.find({ Roles: roles }).sort({
+    updatedAt: -1,
+  });
   res.status(200).json(FloorReceptionist);
 });
 const updateLatestMessage = asyncHandler(async (req, res) => {
