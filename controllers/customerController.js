@@ -53,8 +53,10 @@ const getSentCustomers = asyncHandler(async (req, res) => {
 });
 
 const getWaitingCustomers = asyncHandler(async (req, res) => {
-  const WaitingCustomers = await Customer.find({ Sent: req.query.Sent });
-  res.status(200).json(WaitingCustomers.reverse());
+  const WaitingCustomers = await Customer.find({ Sent: req.query.Sent }).sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(WaitingCustomers);
 });
 const updateCustomer = asyncHandler(async (req, res) => {
   console.log("here is the req. body", req.body);
