@@ -46,9 +46,12 @@ const getFloorCustomers = asyncHandler(async (req, res) => {
   res.status(200).json(Customers.reverse());
 });
 const getSentCustomers = asyncHandler(async (req, res) => {
-  const sentCustomers = await Customer.find({ Sent: req.query.Sent });
-  res.status(200).json(sentCustomers.reverse());
+  const sentCustomers = await Customer.find({ Sent: req.query.Sent }).sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(sentCustomers);
 });
+
 const getWaitingCustomers = asyncHandler(async (req, res) => {
   const WaitingCustomers = await Customer.find({ Sent: req.query.Sent });
   res.status(200).json(WaitingCustomers.reverse());
