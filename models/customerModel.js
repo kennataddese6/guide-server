@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
+const StatusSchema = new mongoose.Schema({
+  postpone: {
+    type: Boolean,
+    required: [true, "Please add a Postpone value"],
+  },
+  date: {
+    type: Date,
+    required: [true, "Please add a Date"],
+  },
+});
 const CustomerSchema = mongoose.Schema(
   {
     FirstName: {
@@ -39,7 +49,7 @@ const CustomerSchema = mongoose.Schema(
       required: [true, "Please add an Elavator Number"],
     },
     Status: {
-      type: String,
+      type: StatusSchema,
       required: [true, "Please add a Status"],
     },
     Waiting: {
