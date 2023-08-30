@@ -23,7 +23,10 @@ const registerCustomer = asyncHandler(async (req, res) => {
     FloorNumber: floorNumber,
     Department: department,
     ElevatorNumber: elevatorNumber,
-    Status: "none",
+    Status: {
+      postpone: false,
+      date: new Date(),
+    },
     Waiting: true,
     Accepted: false,
     Sent: false,
