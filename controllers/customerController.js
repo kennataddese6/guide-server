@@ -83,6 +83,12 @@ const updateCustomer = asyncHandler(async (req, res) => {
       Client.Arrived = await req.body.Arrived;
       await Client.save();
     }
+    if (req.body.Postpone) {
+      Client.Status.postpone = await req.body.Postpone;
+      Client.Status.date = await req.body.date;
+      Client.Waiting = false;
+      await Client.save();
+    }
     res.status(200).json("updated Cusotmer");
   } else {
     res.status(404).json("Customer not found");
