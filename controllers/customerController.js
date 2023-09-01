@@ -67,6 +67,14 @@ const getWaitingCustomers = asyncHandler(async (req, res) => {
   });
   res.status(200).json(WaitingCustomers);
 });
+const getScheduledCustomers = asyncHandler(async (req, res) => {
+  const WaitingCustomers = await Customer.find({
+    "Status.postpone": true,
+  }).sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(WaitingCustomers);
+});
 const updateCustomer = asyncHandler(async (req, res) => {
   console.log("here is the req. body", req.body);
   const Client = await Customer.findOne({ _id: req.body.ID });
@@ -101,4 +109,5 @@ module.exports = {
   updateCustomer,
   getSentCustomers,
   getWaitingCustomers,
+  getScheduledCustomers,
 };
