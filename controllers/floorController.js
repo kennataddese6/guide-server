@@ -4,10 +4,10 @@ const asyncHandler = require("express-async-handler");
 const registerFloor = asyncHandler(async (req, res) => {
   const floor = await Floor.create({
     WorkUnit: req.body.workUnit,
-    Divsion: divison,
-    Department: department,
-    FloorNumber: floorNumber,
-    OfficeNumber: officeNumber,
+    Divison: req.body.divison,
+    Department: req.body.department,
+    FloorNumber: req.body.floorNumber,
+    OfficeNumber: req.body.officeNumber,
   });
   if (floor) {
     res.status(200);
