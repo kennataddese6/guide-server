@@ -10,7 +10,7 @@ const registerFloor = asyncHandler(async (req, res) => {
     OfficeNumber: req.body.officeNumber,
   });
   if (floor) {
-    res.status(200);
+    res.status(200).json(floor);
   } else {
     res.status(409);
   }
