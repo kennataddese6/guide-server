@@ -15,6 +15,13 @@ const registerFloor = asyncHandler(async (req, res) => {
     res.status(409);
   }
 });
+const getFloors = asyncHandler(async (req, res) => {
+  const Floors = await Floor.find().sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(Floors);
+});
 module.exports = {
   registerFloor,
+  getFloors,
 };
