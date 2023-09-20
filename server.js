@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/customers/", require("./routes/customerRoutes"));
+app.use("/api/floors/", require("./routes/floorRoutes"));
+
 console.log("Server is listening on port", port);
 
 wss.on("connection", function connection(ws, req) {

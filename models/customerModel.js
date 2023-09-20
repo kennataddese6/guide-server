@@ -46,11 +46,14 @@ const CustomerSchema = mongoose.Schema(
     },
     ElevatorNumber: {
       type: String,
-      required: [true, "Please add an Elavator Number"],
     },
     Status: {
       type: StatusSchema,
       required: [true, "Please add a Status"],
+    },
+    Booking: {
+      type: Boolean,
+      required: [true, "Please add a Booking Status"],
     },
     Waiting: {
       type: Boolean,
