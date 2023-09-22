@@ -62,9 +62,23 @@ const updateLatestMessage = asyncHandler(async (req, res) => {
     res.status(404).json("Receptionist not found");
   }
 });
+const changePassword = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ _id: req.body.Id });
+  if (user) {
+    if (user.Password === req.body.currentPassword) {
+      user.Password = await req.body.newPassword;
+      await user.save();
+    } else {
+      res.status(404).json("Incorrect Password");
+    }
+  } else {
+    res.status(404).json("User not found");
+  }
+});
 module.exports = {
   registerUser,
   getFloorReceptionists,
   updateLatestMessage,
   login,
+  changePassword,
 };
