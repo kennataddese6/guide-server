@@ -68,8 +68,9 @@ const changePassword = asyncHandler(async (req, res) => {
     if (user.Password === req.body.currentPassword) {
       user.Password = await req.body.newPassword;
       await user.save();
+      res.status(200).json('Password Changed Successfully.')
     } else {
-      res.status(404).json("Incorrect Password");
+      res.status(401).json("Incorrect Password");
     }
   } else {
     res.status(404).json("User not found");
