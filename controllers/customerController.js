@@ -13,7 +13,9 @@ const registerCustomer = asyncHandler(async (req, res) => {
     floorNumber,
     elevatorNumber,
     booking,
+    gender,
   } = req.body;
+  console.log("Here is the gender", gender);
   const customer = await Customer.create({
     FirstName: firstName,
     LastName: lastName,
@@ -25,6 +27,7 @@ const registerCustomer = asyncHandler(async (req, res) => {
     Department: department,
     ElevatorNumber: elevatorNumber,
     Booking: booking,
+    Gender: gender,
     Status: {
       postpone: false,
       date: new Date(),
