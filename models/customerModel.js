@@ -20,6 +20,10 @@ const CustomerSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a Last Name"],
     },
+    Gender: {
+      type: String,
+      required: [true, "Please add a Gender"],
+    },
     Woreda: {
       type: String,
       required: [true, "Please add Woreda"],
