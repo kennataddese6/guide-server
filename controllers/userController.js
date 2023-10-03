@@ -47,6 +47,12 @@ const getFloorReceptionists = asyncHandler(async (req, res) => {
   });
   res.status(200).json(FloorReceptionist);
 });
+const getUsers = asyncHandler(async (req, res) => {
+  const Users = await User.find().sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(Users);
+});
 const updateLatestMessage = asyncHandler(async (req, res) => {
   const LatestMessage = req.body;
   const Receptionist = await User.findOne({ FloorNumber: LatestMessage.to });
@@ -78,4 +84,5 @@ module.exports = {
   updateLatestMessage,
   login,
   changePassword,
+  getUsers,
 };
