@@ -78,6 +78,17 @@ const changePassword = asyncHandler(async (req, res) => {
     res.status(404).json("User not found");
   }
 });
+const ResetPassword = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ Email: req.body.email });
+  if (user) {
+    const resettedPassword = "Welcome2cbe";
+    user.Password = await resettedPassword;
+    await user.save();
+    res.status(200).json("Password Changed Successfully.");
+  } else {
+    res.status(404).json("User not found");
+  }
+});
 module.exports = {
   registerUser,
   getFloorReceptionists,
@@ -85,4 +96,5 @@ module.exports = {
   login,
   changePassword,
   getUsers,
+  ResetPassword,
 };
