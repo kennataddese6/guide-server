@@ -3,22 +3,13 @@ const User = require("../models/userModels");
 const asyncHandler = require("express-async-handler");
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, phoneNumber, floorNumber } = req.body;
-
-  const roles =
-    floorNumber >= 1 && floorNumber <= 48
-      ? ROLES_LIST.FloorReceptionist
-      : floorNumber == 0
-      ? ROLES_LIST.GroundReptionist
-      : floorNumber < 0
-      ? ROLES_LIST.VipReceptionist
-      : ROLES_LIST.Admin;
-  console.log("here is the data", req.body);
+  const { firstName, lastName, email, phoneNumber, floorNumber, role } =
+    req.body;
   const user = await User.create({
     FirstName: firstName,
     LastName: lastName,
     Email: email,
-    Roles: roles,
+    Roles: role,
     PhoneNumber: phoneNumber,
     FloorNumber: floorNumber,
     Password: "Welcome2cbe",
@@ -26,7 +17,6 @@ const registerUser = asyncHandler(async (req, res) => {
   });
   if (user) {
     res.status(200).json(user);
-    console.log("right");
   } else {
     console.log("somethingwent wrong");
   }
@@ -62,9 +52,24 @@ const updateLatestMessage = asyncHandler(async (req, res) => {
     res.status(404).json("Receptionist not found");
   }
 });
+const changePassword = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ _id: req.body.Id });
+  if (user) {
+    if (user.Password === req.body.currentPassword) {
+      user.Password = await req.body.newPassword;
+      await user.save();
+      res.status(200).json("Password Changed Successfully.");
+    } else {
+      res.status(401).json("Incorrect Password");
+    }
+  } else {
+    res.status(404).json("User not found");
+  }
+});
 module.exports = {
   registerUser,
   getFloorReceptionists,
   updateLatestMessage,
   login,
+  changePassword,
 };
