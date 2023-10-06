@@ -40,6 +40,10 @@ const CustomerSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a Department"],
     },
+    RegisteredBy: {
+      type: String,
+      required: [true, "Please add a Registeredby"],
+    },
     PhoneNumber: {
       type: Number,
       required: [true, "Please add a Phone Number"],
