@@ -82,7 +82,6 @@ const getScheduledCustomers = asyncHandler(async (req, res) => {
   res.status(200).json(WaitingCustomers);
 });
 const updateCustomer = asyncHandler(async (req, res) => {
-  console.log("here is the req. body", req.body);
   const Client = await Customer.findOne({ _id: req.body.ID });
   if (Client) {
     if (req.body.Sent) {
