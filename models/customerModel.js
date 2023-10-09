@@ -42,7 +42,6 @@ const CustomerSchema = mongoose.Schema(
     },
     RegisteredBy: {
       type: String,
-      required: [true, "Please add a Registeredby"],
     },
     PhoneNumber: {
       type: Number,
