@@ -48,7 +48,8 @@ const registerCustomer = asyncHandler(async (req, res) => {
   }
 });
 const getCustomers = asyncHandler(async (req, res) => {
-  const Customers = await Customer.find().sort({
+  const User = req.query.User;
+  const Customers = await Customer.find({ RegisteredBy: User }).sort({
     updatedAt: -1,
   });
   res.status(200).json(Customers);
