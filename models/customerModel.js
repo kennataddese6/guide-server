@@ -78,6 +78,14 @@ const CustomerSchema = mongoose.Schema(
       type: Boolean,
       required: [true, "Please add an Arrived Status"],
     },
+    corporate: {
+      type: Boolean,
+      required: [true, "Please add an Corporate Status"],
+    },
+    special: {
+      type: Boolean,
+      required: [true, "Please add an special Status"],
+    },
   },
   {
     timestamps: true,

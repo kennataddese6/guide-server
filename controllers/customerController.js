@@ -15,6 +15,8 @@ const registerCustomer = asyncHandler(async (req, res) => {
     booking,
     gender,
     regiseterdBy,
+    corporate,
+    special,
   } = req.body;
   const customer = await Customer.create({
     FirstName: firstName,
@@ -29,6 +31,8 @@ const registerCustomer = asyncHandler(async (req, res) => {
     Booking: booking,
     Gender: gender,
     RegisteredBy: regiseterdBy,
+    corporate,
+    special,
     Status: {
       postpone: false,
       date: new Date(),
