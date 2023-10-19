@@ -14,8 +14,8 @@ const registerCustomer = asyncHandler(async (req, res) => {
     elevatorNumber,
     booking,
     gender,
+    regiseterdBy,
   } = req.body;
-  console.log("Here is the gender", gender);
   const customer = await Customer.create({
     FirstName: firstName,
     LastName: lastName,
@@ -28,6 +28,7 @@ const registerCustomer = asyncHandler(async (req, res) => {
     ElevatorNumber: elevatorNumber,
     Booking: booking,
     Gender: gender,
+    RegisteredBy: regiseterdBy,
     Status: {
       postpone: false,
       date: new Date(),
@@ -81,7 +82,6 @@ const getScheduledCustomers = asyncHandler(async (req, res) => {
   res.status(200).json(WaitingCustomers);
 });
 const updateCustomer = asyncHandler(async (req, res) => {
-  console.log("here is the req. body", req.body);
   const Client = await Customer.findOne({ _id: req.body.ID });
   if (Client) {
     if (req.body.Sent) {

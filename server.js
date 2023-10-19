@@ -32,7 +32,7 @@ wss.on("connection", function connection(ws, req) {
     if (content || address) {
       clients.forEach(function (clientWs, clientEmail) {
         console.log("User connected is at floor: ", clientEmail);
-        if (clientEmail === Number(address)) {
+        if (clientEmail === String(address)) {
           console.log("message is going to be send to ", address);
           clientWs.send(content);
         } else {

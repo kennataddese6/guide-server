@@ -5,20 +5,26 @@ const asyncHandler = require("express-async-handler");
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, phoneNumber, floorNumber, role } =
     req.body;
-  const user = await User.create({
-    FirstName: firstName,
-    LastName: lastName,
-    Email: email,
-    Roles: role,
-    PhoneNumber: phoneNumber,
-    FloorNumber: floorNumber,
-    Password: "Welcome2cbe",
-    LatestMessage: "",
-  });
-  if (user) {
-    res.status(200).json(user);
+
+  const userExist = await User.findOne({ Email: email });
+  if (userExist) {
+    res.status(401).json("Email is already taken");
   } else {
-    console.log("somethingwent wrong");
+    const user = await User.create({
+      FirstName: firstName,
+      LastName: lastName,
+      Email: email,
+      Roles: role,
+      PhoneNumber: phoneNumber,
+      FloorNumber: floorNumber,
+      Password: "Welcome2cbe",
+      LatestMessage: "",
+    });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      console.log("somethingwent wrong");
+    }
   }
 });
 
@@ -40,6 +46,12 @@ const getFloorReceptionists = asyncHandler(async (req, res) => {
     updatedAt: -1,
   });
   res.status(200).json(FloorReceptionist);
+});
+const getUsers = asyncHandler(async (req, res) => {
+  const Users = await User.find().sort({
+    updatedAt: -1,
+  });
+  res.status(200).json(Users);
 });
 const updateLatestMessage = asyncHandler(async (req, res) => {
   const LatestMessage = req.body;
@@ -66,10 +78,23 @@ const changePassword = asyncHandler(async (req, res) => {
     res.status(404).json("User not found");
   }
 });
+const ResetPassword = asyncHandler(async (req, res) => {
+  const user = await User.findOne({ Email: req.body.email });
+  if (user) {
+    const resettedPassword = "Welcome2cbe";
+    user.Password = await resettedPassword;
+    await user.save();
+    res.status(200).json("Password Changed Successfully.");
+  } else {
+    res.status(404).json("User not found");
+  }
+});
 module.exports = {
   registerUser,
   getFloorReceptionists,
   updateLatestMessage,
   login,
   changePassword,
+  getUsers,
+  ResetPassword,
 };
