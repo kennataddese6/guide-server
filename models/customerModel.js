@@ -29,7 +29,7 @@ const CustomerSchema = mongoose.Schema(
       required: [true, "Please add Woreda"],
     },
     SubCity: {
-      type: Number,
+      type: String,
       required: [true, "Please add subCity"],
     },
     OfficeNumber: {
