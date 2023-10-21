@@ -9,9 +9,11 @@ const {
   changePassword,
   getUsers,
   ResetPassword,
+  updateUser,
 } = require("../controllers/userController");
 
 router.post("/", registerUser);
+router.put("/", updateUser);
 router.post("/ChangePassword", changePassword);
 router.post("/ResetPassword", ResetPassword);
 router.post("/login", login);
