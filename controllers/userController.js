@@ -34,7 +34,7 @@ const updateUser = asyncHandler(async (req, res) => {
   if (user) {
     user.FirstName = FirstName;
     user.LastName = LastName;
-    user.Email = LastName;
+    user.Email = Email;
     user.PhoneNumber = PhoneNumber;
     user.FloorNumber = FloorNumber;
     if (Role === "Floor receptionist") {
@@ -49,7 +49,10 @@ const updateUser = asyncHandler(async (req, res) => {
       throw new Error("No role associated");
     }
     await user.save();
-    res.status(200);
+    const updatedUsers = await User.find().sort({
+      updatedAt: -1,
+    });
+    res.status(200).json(updatedUsers);
   }
 });
 
