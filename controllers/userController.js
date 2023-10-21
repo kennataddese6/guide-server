@@ -27,6 +27,20 @@ const registerUser = asyncHandler(async (req, res) => {
     }
   }
 });
+const updateUser = asyncHandler(async (req, res) => {
+  const { FirstName, LastName, Email, PhoneNumber, PloorNumber, Role, id } =
+    req.body;
+  console.log(
+    "here is the data",
+    FirstName,
+    LastName,
+    Email,
+    PhoneNumber,
+    FirstName,
+    Role,
+    id
+  );
+});
 
 const login = asyncHandler(async (req, res) => {
   const user = await User.findOne({ Email: req.body.email });
@@ -97,4 +111,5 @@ module.exports = {
   changePassword,
   getUsers,
   ResetPassword,
+  updateUser,
 };
