@@ -28,18 +28,29 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 const updateUser = asyncHandler(async (req, res) => {
-  const { FirstName, LastName, Email, PhoneNumber, PloorNumber, Role, id } =
+  const { FirstName, LastName, Email, PhoneNumber, FloorNumber, Role, id } =
     req.body;
-  console.log(
-    "here is the data",
-    FirstName,
-    LastName,
-    Email,
-    PhoneNumber,
-    FirstName,
-    Role,
-    id
-  );
+  const user = await User.findOne({ _id: id });
+  if (user) {
+    user.FirstName = FirstName;
+    user.LastName = LastName;
+    user.Email = LastName;
+    user.PhoneNumber = PhoneNumber;
+    user.FloorNumber = FloorNumber;
+    if (Role === "Floor receptionist") {
+      user.Roles = 4800;
+    } else if (Role === "Lobby receptionist") {
+      user.Role = 1000;
+      user.FloorNumber = 0;
+    } else if (Role === "Admin") {
+      user.Roles = 7706;
+    } else {
+      res.status(404);
+      throw new Error("No role associated");
+    }
+    await user.save();
+    res.status(200);
+  }
 });
 
 const login = asyncHandler(async (req, res) => {
