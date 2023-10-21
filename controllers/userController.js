@@ -32,27 +32,46 @@ const updateUser = asyncHandler(async (req, res) => {
     req.body;
   const user = await User.findOne({ _id: id });
   if (user) {
-    user.FirstName = FirstName;
-    user.LastName = LastName;
-    user.Email = Email;
-    user.PhoneNumber = PhoneNumber;
-    user.FloorNumber = FloorNumber;
     if (Role === "Floor receptionist") {
       user.Roles = 4800;
+      user.FirstName = FirstName;
+      user.LastName = LastName;
+      user.Email = Email;
+      user.PhoneNumber = PhoneNumber;
+      user.FloorNumber = FloorNumber;
+      await user.save();
+      const updatedUsers = await User.find().sort({
+        updatedAt: -1,
+      });
+      res.status(200).json(updatedUsers);
     } else if (Role === "Lobby receptionist") {
-      user.Role = 1000;
+      user.Roles = 1000;
       user.FloorNumber = 0;
+      user.FirstName = FirstName;
+      user.LastName = LastName;
+      user.Email = Email;
+      user.PhoneNumber = PhoneNumber;
+      await user.save();
+      const updatedUsers = await User.find().sort({
+        updatedAt: -1,
+      });
+      res.status(200).json(updatedUsers);
     } else if (Role === "Admin") {
       user.Roles = 7706;
+      user.FloorNumber = 0;
+      user.FirstName = FirstName;
+      user.LastName = LastName;
+      user.Email = Email;
+      user.PhoneNumber = PhoneNumber;
+      await user.save();
+      const updatedUsers = await User.find().sort({
+        updatedAt: -1,
+      });
+      res.status(200).json(updatedUsers);
     } else {
       res.status(404);
       throw new Error("No role associated");
     }
-    await user.save();
-    const updatedUsers = await User.find().sort({
-      updatedAt: -1,
-    });
-    res.status(200).json(updatedUsers);
   }
 });
 
