@@ -1,5 +1,32 @@
 const Customer = require("../models/customerModel");
 const asyncHandler = require("express-async-handler");
+const moment = require("moment");
+const cron = require("node-cron");
+
+// Define a cron job to run daily
+cron.schedule("0 0 * * *", async () => {
+  try {
+    // Calculate the date 90 days ago
+    const ninetyDaysAgo = moment().subtract(90, "days").toDate();
+
+    // Find customers created 90 days ago or earlier
+    const customersToDelete = await Customer.find({
+      createdAt: { $lte: ninetyDaysAgo },
+    });
+
+    // Delete the customers
+    if (customersToDelete.length > 0) {
+      await Customer.deleteMany({
+        _id: { $in: customersToDelete.map((customer) => customer._id) },
+      });
+      console.log(`${customersToDelete.length} customers deleted.`);
+    } else {
+      console.log("No customers to delete.");
+    }
+  } catch (error) {
+    console.error("Error deleting customers:", error);
+  }
+});
 
 const registerCustomer = asyncHandler(async (req, res) => {
   const {
