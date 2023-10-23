@@ -124,8 +124,17 @@ const updateLatestMessage = asyncHandler(async (req, res) => {
 const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findOne({ _id: req.body.Id });
   if (user) {
-    if (user.Password === req.body.currentPassword) {
-      user.Password = await req.body.newPassword;
+    const passwordMatch = await bcrypt.compare(
+      req.body.currentPassword,
+      user.Password
+    );
+    if (passwordMatch) {
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(
+        req.body.newPassword,
+        saltRounds
+      );
+      user.Password = hashedPassword;
       await user.save();
       res.status(200).json("Password Changed Successfully.");
     } else {
