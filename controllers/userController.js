@@ -1,6 +1,7 @@
 const ROLES_LIST = require("../config/roles_list");
 const User = require("../models/userModels");
 const asyncHandler = require("express-async-handler");
+const bcrypt = require("bcrypt");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, phoneNumber, floorNumber, role } =
@@ -10,6 +11,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (userExist) {
     res.status(401).json("Email is already taken");
   } else {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash("Welcome2cbe!", saltRounds);
     const user = await User.create({
       FirstName: firstName,
       LastName: lastName,
@@ -17,7 +20,7 @@ const registerUser = asyncHandler(async (req, res) => {
       Roles: role,
       PhoneNumber: phoneNumber,
       FloorNumber: floorNumber,
-      Password: "Welcome2cbe",
+      Password: hashedPassword,
       LatestMessage: "",
     });
     if (user) {
@@ -78,12 +81,19 @@ const updateUser = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   const user = await User.findOne({ Email: req.body.email });
   if (user) {
-    if (user.Password === req.body.password) {
+    const passwordMatch = await bcrypt.compare(
+      req.body.password,
+      user.Password
+    );
+    if (passwordMatch) {
+      // Passwords match, authentication successful
       res.status(200).json(user);
     } else {
+      // Passwords don't match
       res.status(409).json("Incorrect Email or Password");
     }
   } else {
+    // User not found
     res.status(404).json("Receptionist not found");
   }
 });
@@ -128,8 +138,9 @@ const changePassword = asyncHandler(async (req, res) => {
 const ResetPassword = asyncHandler(async (req, res) => {
   const user = await User.findOne({ Email: req.body.email });
   if (user) {
-    const resettedPassword = "Welcome2cbe";
-    user.Password = await resettedPassword;
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash("Welcome2cbe!", saltRounds);
+    user.Password = await hashedPassword;
     await user.save();
     res.status(200).json("Password Changed Successfully.");
   } else {
