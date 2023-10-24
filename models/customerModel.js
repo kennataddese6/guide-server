@@ -29,7 +29,7 @@ const CustomerSchema = mongoose.Schema(
       required: [true, "Please add Woreda"],
     },
     SubCity: {
-      type: Number,
+      type: String,
       required: [true, "Please add subCity"],
     },
     OfficeNumber: {
@@ -77,6 +77,14 @@ const CustomerSchema = mongoose.Schema(
     Arrived: {
       type: Boolean,
       required: [true, "Please add an Arrived Status"],
+    },
+    corporate: {
+      type: Boolean,
+      required: [true, "Please add an Corporate Status"],
+    },
+    special: {
+      type: Boolean,
+      required: [true, "Please add an special Status"],
     },
   },
   {
